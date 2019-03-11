@@ -1,4 +1,16 @@
 Rails.application.configure do
+  #config.action_mailer.delivery_method = :smtp
+
+  #config.action_mailer.smtp_settings = {
+    #address: "smtp.gmail.com",
+    #port: 587,
+    #domain: "example.com",
+    #authentication: "plain",
+    #enable_starttls_auto: true,
+    #user_name: ENV['GMAIL_ADDRESS'],
+   # password: ENV['GMAIL_PASSWORD']
+  #}
+
   # Settings specified here will take precedence over those in config/application.rb.
 config.action_mailer.default_url_options = { host: ' https://nomster-tedy-h-w.herokuapp.com' }
 
@@ -33,7 +45,7 @@ config.action_mailer.default_url_options = { host: ' https://nomster-tedy-h-w.he
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
+config.action_mailer.delivery_method = :test
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
