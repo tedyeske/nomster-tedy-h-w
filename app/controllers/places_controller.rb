@@ -5,11 +5,12 @@ class PlacesController < ApplicationController
 #validates :@place, length: {minimum: 3}
 
 def index
-  @places = Place.all
+  @places = Place.order(:id)
  
 end
 def new
   @place = Place.new
+ 
 
   end
 def create
@@ -23,16 +24,16 @@ def create
   end
 end
 def show
-   @place = Place.find(params[:id])
-    @comment = Comment.new
+  @place = Place.find(params[:id])
+  @comment = Comment.new
+  @photo = Photo.new
 
-
-  end
+end
    def edit
      @place = Place.find(params[:id])
-if @place.user != current_user
-    return render plain: 'Not Allowed', status: :forbidden
-  end
+    if @place.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+     end
 
   end
 
@@ -52,15 +53,15 @@ if @place.valid?
 
   end
 def destroy
-   @place = Place.find(params[:id])
-@place.destroy
-redirect_to root_path
+  @place = Place.find(params[:id])
+  @place.destroy
+  redirect_to root_path
   end
 
   private
 
   def place_params
-    params.require(:place).permit(:name, :description, :address)
+    params.require(:place).permit(:name, :address, :description)
   end
 
 
